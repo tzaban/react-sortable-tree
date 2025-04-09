@@ -1,4 +1,4 @@
-import React from 'react';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { SortableTree } from '../src';
 import { TreeNode } from '../src/types';
@@ -26,7 +26,7 @@ describe('SortableTree', () => {
   });
 
   it('handles node click events', () => {
-    const handleNodeClick = jest.fn();
+    const handleNodeClick = vi.fn();
     render(
       <SortableTree treeData={mockTreeData} onChange={() => {}} onNodeClick={handleNodeClick} />
     );
@@ -36,8 +36,8 @@ describe('SortableTree', () => {
   });
 
   it('handles expand/collapse events', () => {
-    const handleNodeExpand = jest.fn();
-    const handleNodeCollapse = jest.fn();
+    const handleNodeExpand = vi.fn();
+    const handleNodeCollapse = vi.fn();
     render(
       <SortableTree
         treeData={mockTreeData}

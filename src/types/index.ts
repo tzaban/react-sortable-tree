@@ -1,12 +1,15 @@
 import { z } from 'zod';
 
-export const TreeNodeSchema = z.object({
+const TreeNodeBase = z.object({
   id: z.string(),
   title: z.string(),
-  children: z.array(z.lazy(() => TreeNodeSchema)).optional(),
   expanded: z.boolean().optional(),
   selected: z.boolean().optional(),
   data: z.record(z.unknown()).optional(),
+});
+
+export const TreeNodeSchema: z.ZodType<any> = TreeNodeBase.extend({
+  children: z.array(z.lazy(() => TreeNodeSchema)).optional(),
 });
 
 export type TreeNode = z.infer<typeof TreeNodeSchema>;

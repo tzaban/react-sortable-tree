@@ -23,10 +23,22 @@ export const SortableTree: React.FC<TreeProps> = ({
   };
 
   const handleNodeExpand = (node: TreeNode) => {
+    const newTreeData = [...treeData];
+    const nodeIndex = newTreeData.findIndex(n => n.id === node.id);
+    if (nodeIndex !== -1) {
+      newTreeData[nodeIndex] = { ...node, expanded: true };
+      onChange(newTreeData);
+    }
     onNodeExpand?.(node);
   };
 
   const handleNodeCollapse = (node: TreeNode) => {
+    const newTreeData = [...treeData];
+    const nodeIndex = newTreeData.findIndex(n => n.id === node.id);
+    if (nodeIndex !== -1) {
+      newTreeData[nodeIndex] = { ...node, expanded: false };
+      onChange(newTreeData);
+    }
     onNodeCollapse?.(node);
   };
 
